@@ -37,7 +37,7 @@
           ];
         in
         {
-          devShells.default = with pkgs; mkShellNoCC {
+          devShells.default = with pkgs; mkShell {
             packages = [
               nil
               nixpkgs-fmt

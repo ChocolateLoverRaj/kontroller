@@ -2,6 +2,8 @@
 , stdenv
 , fetchurl
 , zlib
+, autoPatchelfHook
+, pkgs
 }:
 let
   platform = {
@@ -16,6 +18,12 @@ in
 stdenv.mkDerivation rec {
   pname = "rust-esp";
   version = "1.78.0.0";
+
+  nativeBuildInputs = with pkgs; [
+    autoPatchelfHook
+    libgcc
+    stdenv.cc.cc.lib
+  ];
 
   src = fetchurl {
     url = "https://github.com/esp-rs/rust-build/releases/download/v${version}/rust-${version}-${platform}.tar.xz";
